@@ -38,8 +38,8 @@ class ItemListTest {
 
     @Test
     public void numOfItemsTest() {
-        l1.removeItem(i1);
-        l2.removeItem(i3);
+        l1.removeItem("apples");
+        l2.removeItem("broccoli");
 
         assertEquals(0, l1.numOfItems());
         assertEquals(4, l2.numOfItems());

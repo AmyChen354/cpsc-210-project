@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 // Represents a list of item
 public class ItemList {
@@ -22,8 +21,29 @@ public class ItemList {
     // REQUIRES: The list already contain an item with the same name
     // MODIFIES: this
     // EFFECTS: Remove i from the list
-    public void removeItem(Item i) {
-        itemList.remove(i);
+    public void removeItem(String removeName) {
+        for (int i = 0; i < itemList.size(); i++) {
+            if (removeName.equals(itemList.get(i).getName())) {
+                itemList.remove(i);
+            }
+        }
+    }
+
+    public String showItems() {
+        for (Item i : itemList) {
+            String allItems = i.getName();
+        }
+    }
+
+    public Item findItem(String name) {
+        for (Item i : itemList) {
+            if (name.equals(i.getName())) {
+                return i;
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 
     // EFFECTS: Returns the number of items in the list
@@ -39,4 +59,9 @@ public class ItemList {
         }
         return sum;
     }
+
+//    public void sortInAscending(ItemList itemList) {
+//        Collections.sort(itemList);
+//    }
+
 }
