@@ -7,6 +7,7 @@ public class ItemList {
     //    private int date;   //date of the item list
     private List<Item> itemList;   //the list of the item bought on a certain day
 
+    // EFFECTS: Constructs an empty item list set to itemList
     public ItemList() {
         itemList = new ArrayList<>();
     }
@@ -18,9 +19,9 @@ public class ItemList {
         itemList.add(i);
     }
 
-    // REQUIRES: The list already contain an item with the same name
+    // REQUIRES: The list already contain an i with removeName
     // MODIFIES: this
-    // EFFECTS: Remove i from the list
+    // EFFECTS: Searches for an i with matching removeName and remove it from itemList
     public void removeItem(String removeName) {
         for (int i = 0; i < itemList.size(); i++) {
             if (removeName.equals(itemList.get(i).getName())) {
@@ -29,18 +30,29 @@ public class ItemList {
         }
     }
 
+    // EFFECTS: Constructs an empty list set to allItems;
+    //          if itemList.size != 0 then add the name of all items in itemList to allItems
+    //          and returns allItems as a string;
+    //          otherwise returns null
     public String showItems() {
-        for (Item i : itemList) {
-            String allItems = i.getName();
+        List<String> allItems = new ArrayList<>();
+
+        if (!(itemList.size() == 0)) {
+            for (int i = 0; i < itemList.size(); i++) {
+                allItems.add(itemList.get(i).getName());
+            }
+            return allItems.toString();
+        } else {
+            return null;
         }
     }
 
+    // EFFECTS: Searches for an i in the itemList with matching name and returns i;
+    //          otherwise returns null
     public Item findItem(String name) {
-        for (Item i : itemList) {
-            if (name.equals(i.getName())) {
-                return i;
-            } else {
-                return null;
+        for (Item item : itemList) {
+            if (name.equals(item.getName())) {
+                return item;
             }
         }
         return null;
@@ -54,14 +66,10 @@ public class ItemList {
     // EFFECTS: Returns the sum of the costs of all items in the list
     public double sumOfCosts() {
         double sum = 0;
-        for (Item i : itemList) {
-            sum += i.getCost();
+        for (Item item : itemList) {
+            sum += item.getCost();
         }
         return sum;
     }
-
-//    public void sortInAscending(ItemList itemList) {
-//        Collections.sort(itemList);
-//    }
 
 }

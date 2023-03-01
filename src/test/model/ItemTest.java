@@ -20,8 +20,8 @@ public class ItemTest {
 
     @Test
     public void assignItemNameTest() {
-        i1.assignItemName("oranges");
-        i2.assignItemName("coke");
+        i1.setItemName("oranges");
+        i2.setItemName("coke");
 
         assertEquals("oranges", i1.getName());
         assertEquals("coke", i2.getName());
@@ -29,8 +29,8 @@ public class ItemTest {
 
     @Test
     public void assignItemCostTest() {
-        i1.assignItemCost(29.48);
-        i2.assignItemCost(237.00);
+        i1.setItemCost(29.48);
+        i2.setItemCost(237.00);
 
         assertEquals(29.48, i1.getCost());
         assertEquals(237.00, i2.getCost());
@@ -38,8 +38,8 @@ public class ItemTest {
 
     @Test
     public void assignItemExpiryDateTest() {
-        i1.assignItemExpiryDate(20240918);
-        i2.assignItemExpiryDate(20271201);
+        i1.setItemExpiryDate(20240918);
+        i2.setItemExpiryDate(20271201);
 
         assertEquals(20240918, i1.getExpiryDate());
         assertEquals(20271201, i2.getExpiryDate());
