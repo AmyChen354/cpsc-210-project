@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.InvalidDateException;
+
 import java.util.*;
 
 // Represents an account book with a list of item lists with specified dates
@@ -32,7 +34,7 @@ public class AccountBook {
         return Arrays.toString(allLists);
     }
 
-    // EFFECTS: Searches for an item list with the matching date and returns the date of it,
+    // EFFECTS: Returns an item list with the matching date,
     //          otherwise returns null
     public ItemList findList(Integer date) {
         if (book.containsKey(date)) {

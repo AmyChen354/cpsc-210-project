@@ -1,6 +1,11 @@
 package ui;
 
 import model.*;
+import model.exceptions.InvalidDateException;
+import model.exceptions.ListNonexistentException;
+import model.exceptions.NegativeCostException;
+import model.exceptions.NoItemsException;
+
 import java.util.Scanner;
 
 // Account keeper application

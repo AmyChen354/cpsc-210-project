@@ -4,9 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 // Test for methods in ItemList class
-class ItemListTest {
+public class ItemListTest {
     private Item i1;
     private Item i2;
     private Item i3;
@@ -15,6 +16,7 @@ class ItemListTest {
 
     private ItemList l1;
     private ItemList l2;
+    private ItemList l3;
 
 
     @BeforeEach
@@ -34,6 +36,32 @@ class ItemListTest {
         l2.addItem(i3);
         l2.addItem(i4);
         l2.addItem(i5);
+
+        l3 = new ItemList();
+    }
+
+    @Test
+    public void showItemsTest() {
+        assertEquals("[apples]", l1.showItems());
+        assertEquals("[apples, milk, broccoli, Lays chips, bread]", l2.showItems());
+    }
+
+    @Test
+    public void showItemsEmptyListTest() {
+        assertNull(l3.showItems());
+    }
+
+    @Test
+    public void findItemTest() {
+        assertEquals(i1, l1.findItem("apples"));
+        assertEquals(i5, l2.findItem("bread"));
+    }
+
+    @Test
+    public void cannotFindItemTest() {
+        assertNull(l1.findItem("bread"));
+        assertNull(l2.findItem("cake"));
+        assertNull(l3.findItem("broccoli"));
     }
 
     @Test
@@ -43,11 +71,13 @@ class ItemListTest {
 
         assertEquals(0, l1.numOfItems());
         assertEquals(4, l2.numOfItems());
+        assertEquals(0, l3.numOfItems());
     }
 
     @Test
     public void sumOfCostsTest() {
         assertEquals(5.50, l1.sumOfCosts());
         assertEquals(18.93, l2.sumOfCosts());
+        assertEquals(0.00, l3.sumOfCosts());
     }
 }

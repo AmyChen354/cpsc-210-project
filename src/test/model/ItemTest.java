@@ -19,7 +19,7 @@ public class ItemTest {
     }
 
     @Test
-    public void assignItemNameTest() {
+    public void setItemNameTest() {
         i1.setItemName("oranges");
         i2.setItemName("coke");
 
@@ -28,7 +28,7 @@ public class ItemTest {
     }
 
     @Test
-    public void assignItemCostTest() {
+    public void setItemCostTest() {
         i1.setItemCost(29.48);
         i2.setItemCost(237.00);
 
@@ -37,7 +37,7 @@ public class ItemTest {
     }
 
     @Test
-    public void assignItemExpiryDateTest() {
+    public void setItemExpiryDateTest() {
         i1.setItemExpiryDate(20240918);
         i2.setItemExpiryDate(20271201);
 
