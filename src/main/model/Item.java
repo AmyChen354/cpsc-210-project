@@ -1,5 +1,7 @@
 package model;
 
+import model.exceptions.NegativeCostException;
+
 // Represents an item having a name, cost (in dollars) and expiry date
 public class Item {
     private String name;      // the name of the item
