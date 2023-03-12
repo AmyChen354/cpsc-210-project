@@ -55,8 +55,8 @@ public class AccountBookTest {
 
     @Test
     public void showListsTest() {
-        assertEquals("[20230226]", ab1.showLists());
-        assertEquals("[20231205, 20230226]", ab2.showLists());
+        assertEquals("[20230226]", ab1.showDates());
+        assertEquals("[20231205, 20230226]", ab2.showDates());
     }
 
     @Test

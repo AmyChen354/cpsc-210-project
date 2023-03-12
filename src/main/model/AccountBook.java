@@ -1,16 +1,25 @@
 package model;
 
 import model.exceptions.InvalidDateException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.*;
 
 // Represents an account book with a list of item lists with specified dates
 public class AccountBook {
+
     private Map<Integer, ItemList> book;
 
-    // Constructs an empty account book set to book
+    // Constructs an empty account book
     public AccountBook() {
         book = new HashMap<>();
+    }
+
+    // EFFECTS: book getter
+    public Map<Integer, ItemList> getBook() {
+        return book;
     }
 
     // MODIFIES: this
@@ -28,10 +37,10 @@ public class AccountBook {
         return book.size();
     }
 
-    // EFFECTS: Returns all item lists in book as a string
-    public String showLists() {
-        Integer[] allLists = book.keySet().toArray(new Integer[0]);
-        return Arrays.toString(allLists);
+    // EFFECTS: Returns all dates in book as a string
+    public String showDates() {
+        Integer[] allDates = book.keySet().toArray(new Integer[0]);
+        return Arrays.toString(allDates);
     }
 
     // EFFECTS: Returns an item list with the matching date,
@@ -43,4 +52,21 @@ public class AccountBook {
             return null;
         }
     }
+
+    public JSONArray toJson() {
+        JSONArray array = new JSONArray();
+
+        for (Map.Entry<Integer, ItemList> accountBook : book.entrySet()) {
+            JSONObject json = new JSONObject();
+            Integer date = accountBook.getKey();
+            ItemList items = accountBook.getValue();
+            JSONArray itemList = items.itemsToJson();
+
+            json.put("date", String.valueOf(date));
+            json.put("items", itemList);
+            array.put(json);
+        }
+        return array;
+    }
+
 }

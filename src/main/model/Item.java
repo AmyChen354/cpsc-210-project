@@ -1,9 +1,11 @@
 package model;
 
 import model.exceptions.NegativeCostException;
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents an item having a name, cost (in dollars) and expiry date
-public class Item {
+public class Item implements Writable {
     private String name;      // the name of the item
     private double cost;      // the cost of the item
     private int expiryDate;   // the expiry date of the item(e.g. 2023/02/28 would be 20230228)
@@ -45,6 +47,15 @@ public class Item {
 
     public int getExpiryDate() {
         return expiryDate;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("cost", cost);
+        json.put("expiry date", expiryDate);
+        return json;
     }
 
 //    @Override

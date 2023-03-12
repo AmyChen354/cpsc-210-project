@@ -5,33 +5,46 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.ListNonexistentException;
 import model.exceptions.NegativeCostException;
 import model.exceptions.NoItemsException;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Account keeper application
 public class AccountKeeper {
+    private static final String JSON_STORE = "./data/AccountBook.json";
     private AccountBook book;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: Runs the account keeper application
-    public AccountKeeper() {
+    public AccountKeeper() throws FileNotFoundException {
+        book = new AccountBook();
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runKeeper();
     }
 
     // MODIFIES: this
     // EFFECTS: Initializes account book
-    private void init() {
-        book = new AccountBook();
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
+//    private void init() throws FileNotFoundException {
+//        book = new AccountBook();
+//        input = new Scanner(System.in);
+//        input.useDelimiter("\n");
+//        jsonWriter = new JsonWriter(JSON_STORE);
+//        jsonReader = new JsonReader(JSON_STORE);
+//    }
 
     // MODIFIES: this
     // EFFECTS: Processes user input
-    private void runKeeper() {
+    private void runKeeper() throws FileNotFoundException {
         boolean keepGoing = true;
         String command = null;
-        init();
 
         while (keepGoing) {
             mainMenu();
@@ -52,6 +65,8 @@ public class AccountKeeper {
         System.out.println("\nWelcome! Please select from:");
         System.out.println("\tn -> Create a new list");
         System.out.println("\te -> Existing list");
+        System.out.println("\ts -> Save account book to file");
+        System.out.println("\tl -> Load account book from file");
         System.out.println("\tq -> Quit");
     }
 
@@ -61,6 +76,10 @@ public class AccountKeeper {
         if (command.equals("n")) {
             ItemList newList = new ItemList();
             createNewList(newList);
+        } else if (command.equals("s")) {
+            saveAccountBook();
+        } else if (command.equals("l")) {
+            loadAccountBook();
         } else if (command.equals("e")) {
             if (book.numOfLists() <= 0) {
                 System.out.println("You don't have any item list in the account book yet, "
@@ -259,7 +278,7 @@ public class AccountKeeper {
     // EFFECTS: Displays all dates in book and prompts user to select a date from it to proceed;
     //          if cannot find the date from the book, then throws ListNonexistentException
     private ItemList selectItemList() throws ListNonexistentException {
-        System.out.printf("You have these dates in your account book: %n %s %n", book.showLists());
+        System.out.printf("You have these dates in your account book: %n %s %n", book.showDates());
         Integer selectDate = 0;
 
         while (!(selectDate > 0)) {
@@ -283,5 +302,24 @@ public class AccountKeeper {
         System.out.printf("You have these items in this list: %n %s %n", selectedList.showItems());
     }
 
+    private void saveAccountBook() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(book);
+            jsonWriter.close();
+            System.out.println("Saved this account book to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    private void loadAccountBook() {
+        try {
+            book = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }

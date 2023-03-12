@@ -1,9 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.lang.reflect.WildcardType;
 import java.util.*;
 
 // Represents a list of item
-public class ItemList {
+public class ItemList implements Writable {
     //    private int date;   //date of the item list
     private List<Item> itemList;   //the list of the item bought on a certain day
 
@@ -72,4 +77,21 @@ public class ItemList {
         return sum;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("items", itemsToJson());
+        return json;
+    }
+
+    // EFFECTS: Returns items in an item list as a JSON array
+    public JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : itemList) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 }
