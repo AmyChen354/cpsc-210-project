@@ -31,18 +31,8 @@ public class AccountKeeper {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes account book
-//    private void init() throws FileNotFoundException {
-//        book = new AccountBook();
-//        input = new Scanner(System.in);
-//        input.useDelimiter("\n");
-//        jsonWriter = new JsonWriter(JSON_STORE);
-//        jsonReader = new JsonReader(JSON_STORE);
-//    }
-
-    // MODIFIES: this
     // EFFECTS: Processes user input
-    private void runKeeper() throws FileNotFoundException {
+    private void runKeeper() {
         boolean keepGoing = true;
         String command = null;
 
@@ -309,7 +299,7 @@ public class AccountKeeper {
             jsonWriter.close();
             System.out.println("Saved this account book to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 

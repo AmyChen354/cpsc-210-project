@@ -9,7 +9,6 @@ import java.util.*;
 
 // Represents a list of item
 public class ItemList implements Writable {
-    //    private int date;   //date of the item list
     private List<Item> itemList;   //the list of the item bought on a certain day
 
     // EFFECTS: Constructs an empty item list set to itemList

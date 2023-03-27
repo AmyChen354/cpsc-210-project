@@ -40,13 +40,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: Parses account book from JSON object and returns it
+    // EFFECTS: Parses account book from JSON array and returns it
     private AccountBook parseAccountBook(JSONArray jsonArray) {
         AccountBook ab = new AccountBook();
         addDates(ab, jsonArray);
         return ab;
     }
 
+    // MODIFIES: ab
+    // EFFECTS: Parses items from JSON array and adds it to account book
     private void addDates(AccountBook ab, JSONArray jsonArray) {
         for (Object object : jsonArray) {
             Integer date = ((JSONObject) object).getInt("date");
