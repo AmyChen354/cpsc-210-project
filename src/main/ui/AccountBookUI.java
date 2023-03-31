@@ -39,6 +39,9 @@ public class AccountBookUI {
     private void frameComponents() {
         frame.setBounds(200, 100, 800, 700);
         frame.setLayout(null);
+        JLabel label = new JLabel("a");
+//        label.setText("<html><center><font size = '5'><color = blue></b>Welcome!</font>");
+        frame.add(label);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -88,7 +91,6 @@ public class AccountBookUI {
                     int date = Integer.parseInt(dateField.getText());
                     ItemList newList = new ItemList();
                     book.addList(date, newList);
-                    System.out.println("Created date: " + date);
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -108,7 +110,7 @@ public class AccountBookUI {
         public void mouseExited(MouseEvent e) {}
     };
 
-
+    // EFFECTS: Represents action to be taken before user want to manage an existing list
     public ItemList selectListEvent() {
         String allDates = book.showDates().replace("[", "")
                 .replace("]", "").replace(" ", "");
@@ -142,7 +144,7 @@ public class AccountBookUI {
 
             ItemList list = selectListEvent();
             int itemInfo = JOptionPane.showConfirmDialog(null,
-                    panel, "Please enter the info of item", JOptionPane.OK_CANCEL_OPTION);
+                    panel, "Enter the details of item", JOptionPane.OK_CANCEL_OPTION);
 
             if (itemInfo == JOptionPane.OK_OPTION) {
                 String inputName = nameField.getText();
@@ -177,7 +179,6 @@ public class AccountBookUI {
                 if (removeName == JOptionPane.OK_OPTION) {
                     String inputName = nameField.getText();
                     list.removeItem(inputName);
-                    System.out.println("Removed: " + inputName);
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -201,10 +202,11 @@ public class AccountBookUI {
         }
     }
 
+    // EFFECTS: Represents action to be taken when user want to view all the items on a selected date
     private class ShowItemsAction extends AbstractAction {
 
         ShowItemsAction() {
-            super("Show all items in the list");
+            super("View items in the list");
         }
 
         @Override
