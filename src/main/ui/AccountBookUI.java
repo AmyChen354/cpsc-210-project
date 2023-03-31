@@ -8,7 +8,6 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import java.io.IOException;
 // Represents application's main window frame
 public class AccountBookUI {
     private static JFrame frame;
-    private ItemList list;
     private AccountBook book;
     private static final String JSON_STORE = "D:/AccountBook.json";
     private JsonWriter jsonWriter;
@@ -30,13 +28,11 @@ public class AccountBookUI {
 
     // EFFECTS: Constructor sets up the components of main window: frame, writer and reader, and menu
     public AccountBookUI() {
-        list = new ItemList();
         book = new AccountBook();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         frameComponents();
         menu();
-//        showItems();
     }
 
     // EFFECTS: Sets up frame with bounds and layout
@@ -58,11 +54,11 @@ public class AccountBookUI {
         JMenu loadMenu = new JMenu("Load");
         menuBar.add(loadMenu);
 
-        addMenuItem(existingListMenu, new SelectListAction());
         newListMenu.addMouseListener(addListAction);
         addMenuItem(existingListMenu, new AddItemAction());
         addMenuItem(existingListMenu, new RemoveItemAction());
         addMenuItem(existingListMenu, new CountItemsAction());
+        addMenuItem(existingListMenu, new ShowItemsAction());
         saveMenu.addMouseListener(saveAction);
         loadMenu.addMouseListener(loadAction);
 
@@ -113,41 +109,16 @@ public class AccountBookUI {
     };
 
 
-    private class SelectListAction extends AbstractAction {
-
-        SelectListAction() {
-            super("Select an existing list");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            String allDates = book.showDates().replace("[", "")
-                    .replace("]", "").replace(" ", "");
-            String[] lists = allDates.split(",");
-            String selectedDate = (String) JOptionPane.showInputDialog(null,
-                     "Select a date: ", "Select the date of the list you would like to process",
-                    JOptionPane.QUESTION_MESSAGE, null, lists, lists[0]);
-
-            System.out.println("Selected " + selectedDate);
-        }
+    public ItemList selectListEvent() {
+        String allDates = book.showDates().replace("[", "")
+                .replace("]", "").replace(" ", "");
+        String[] lists = allDates.split(",");
+        String selectedDate = (String) JOptionPane.showInputDialog(null,
+                "Select a date: ", "Select the date of the list you would like to process",
+                JOptionPane.QUESTION_MESSAGE, null, lists, lists[0]);
+        int date = Integer.parseInt(selectedDate);
+        return book.findList(date);
     }
-
-//    public ItemList selectListEvent(ItemList selectedList) {
-//        ActionListener l = new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent event) {
-//                String allDates = book.showDates().replace("[", "")
-//                        .replace("]", "").replace(" ", "");
-//                String[] lists = allDates.split(",");
-//                String selectedDate = (String) JOptionPane.showInputDialog(null,
-//                        "Select a date: ", "Select the date of the list you would like to process",
-//                        JOptionPane.QUESTION_MESSAGE, null, lists, lists[0]);
-//                int date = Integer.parseInt(selectedDate);
-//                selectedList = book.findList(date);
-//            }
-//        };
-//        return l1;
-//    }
 
     // EFFECTS: Represents action to be taken when user want to add a new item to a selected date
     private class AddItemAction extends AbstractAction {
@@ -169,22 +140,17 @@ public class AccountBookUI {
             panel.add(new JLabel("Item expiry date(yyyymmdd): "));
             panel.add(expiryDateField);
 
+            ItemList list = selectListEvent();
             int itemInfo = JOptionPane.showConfirmDialog(null,
                     panel, "Please enter the info of item", JOptionPane.OK_CANCEL_OPTION);
-            try {
-                if (itemInfo == JOptionPane.OK_OPTION) {
-                    String inputName = nameField.getText();
-                    Double inputCost = Double.parseDouble(costField.getText());
-                    int inputED = Integer.parseInt(expiryDateField.getText());
 
-                    Item i = new Item(inputName, inputCost, inputED);
-                    list.addItem(i);
-                    book = new AccountBook();
-                    book.addList(1, list);
-                    System.out.println("Added: " + inputName);
-                }
-            } catch (Exception e) {
-                System.out.println(e);
+            if (itemInfo == JOptionPane.OK_OPTION) {
+                String inputName = nameField.getText();
+                Double inputCost = Double.parseDouble(costField.getText());
+                int inputED = Integer.parseInt(expiryDateField.getText());
+
+                Item i = new Item(inputName, inputCost, inputED);
+                list.addItem(i);
             }
         }
     }
@@ -202,9 +168,9 @@ public class AccountBookUI {
             JTextField nameField = new JTextField(10);
             panel.add(new JLabel("Item name: "));
             panel.add(nameField);
-
+            ItemList list = selectListEvent();
             int removeName = JOptionPane.showConfirmDialog(null,
-                    panel, "Please enter the name of the item you would like to remove",
+                    panel, "Enter the name of the item to remove",
                     JOptionPane.OK_CANCEL_OPTION);
 
             try {
@@ -228,40 +194,35 @@ public class AccountBookUI {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            JPanel panel = new JPanel();
-            JTextField dateField = new JTextField(10);
-            panel.add(new JLabel("Date: "));
-            panel.add(dateField);
-
-            int selectedDate = JOptionPane.showConfirmDialog(null,
-                    panel, "Please enter the date of the list (yyyymmdd) you would like to process",
-                    JOptionPane.OK_CANCEL_OPTION);
-            try {
-                if (selectedDate == JOptionPane.OK_OPTION) {
-                    int date = Integer.parseInt(dateField.getText());
-                    ItemList selectedList = book.findList(date);
-                    int num = selectedList.numOfItems();
-                    System.out.println("There are" + num + "items in the list");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            ItemList list = selectListEvent();
+            int num = list.numOfItems();
+            JOptionPane.showMessageDialog(null,
+                    "You have " + num + " item(s) in the list");
         }
     }
 
-//    private void showItems() {
-//        ActionListener l = new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    area.setText(list.showItems());
-//                } catch (Exception e1) {
-//                    System.out.println(e1);
-//                }
-//            }
-//        };
-//        showButton.addActionListener(l);
-//    }
+    private class ShowItemsAction extends AbstractAction {
+
+        ShowItemsAction() {
+            super("Show all items in the list");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            ItemList list = selectListEvent();
+            JPanel panel = new JPanel();
+            JTextArea area = new JTextArea();
+            area.setBounds(80, 100, 100, 100);
+            String s = list.showItems().replace("[", "")
+                    .replace("]", "").replace(", ", "\n")
+                    .replace(" ", "   ");
+            area.setText(s);
+            panel.add(area);
+
+            JOptionPane.showMessageDialog(null, panel,
+                    "View items", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     // EFFECTS: Represents action to be taken when user want to save the account book to a directory
     MouseListener saveAction = new MouseListener() {

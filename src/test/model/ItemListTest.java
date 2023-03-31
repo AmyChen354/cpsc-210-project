@@ -42,8 +42,9 @@ public class ItemListTest {
 
     @Test
     public void showItemsTest() {
-        assertEquals("[apples]", l1.showItems());
-        assertEquals("[apples, milk, broccoli, Lays chips, bread]", l2.showItems());
+        assertEquals("[apples $5.5 20230317]", l1.showItems());
+        assertEquals("[apples $5.5 20230317, milk $3.97 20230320, broccoli $4.0 20230319, " +
+                "Lays chips $2.19 20230527, bread $3.27 20230405]", l2.showItems());
     }
 
     @Test

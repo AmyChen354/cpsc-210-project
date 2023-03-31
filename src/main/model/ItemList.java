@@ -43,7 +43,9 @@ public class ItemList implements Writable {
 
         if (!(itemList.size() == 0)) {
             for (int i = 0; i < itemList.size(); i++) {
-                allItems.add(itemList.get(i).getName());
+                String itemInfo = itemList.get(i).getName() + " $"
+                        + itemList.get(i).getCost() + " " + itemList.get(i).getExpiryDate();
+                allItems.add(itemInfo);
             }
             return allItems.toString();
         } else {
