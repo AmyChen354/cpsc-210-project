@@ -43,3 +43,13 @@ software I designed also helps users keep track of the expiration dates of food 
   items and dates I have created so far to file and have the option to do so or not
 - As a user, when I start the application, I want to be given the option to load the account book and dates I have
   created so far from file
+
+# Instructions for Grader
+
+- You can add a new list to the account book by pressing the "New list" menu on the top
+- You can add a new item to a date by pressing the "Existing list" menu on the top and then "Add new item"
+- You can remove an item from a date by pressing the "Existing list" menu on the top and then "Remove an item"
+- You can count the number of items on a date by pressing the "Existing list" menu on the top and then "Count the 
+  number of items"
+- You can save the account book to local directory by pressing the "Save" menu on the top
+- You can load the account book from local directory by pressing the "Load" menu on the top

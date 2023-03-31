@@ -6,11 +6,13 @@ import java.awt.*;
 import java.util.*;
 import java.util.Timer;
 
+// Represents a splashscreen displayed when the application starts
 public class SplashScreen extends JWindow {
     private JPanel contentPane;
     Image splashScreen;
     ImageIcon imageIcon;
 
+    // Constructs a splashscreen with image, label, adjusted size, and the length of displaying time
     public SplashScreen(JFrame frame, String message) {
         setBounds(100, 100, 513, 331);
         contentPane = new JPanel();
@@ -41,7 +43,11 @@ public class SplashScreen extends JWindow {
         int y = (screenSize.height - getSize().height) / 2;
         // Set new location for JWindow
 
-        // Timer
+        timer(frame);
+    }
+
+    // A timer for the length of the splashscreen displaying time
+    public void timer(JFrame frame) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -52,45 +58,9 @@ public class SplashScreen extends JWindow {
         }, 5000);
     }
 
-    // Paint image onto JWindow
+    // Paint the image onto the splashscreen
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(splashScreen, 0, 0, this);
     }
 }
-
-//    public SplashScreen() {
-//        splashScreen = Toolkit.getDefaultToolkit()
-//                .getImage("./data/accounts-book-icon-188112145.jpg");
-//        // Create ImageIcon from Image
-//        imageIcon = new ImageIcon(splashScreen);
-//        // Set JWindow size from image size
-//        setSize(imageIcon.getIconWidth(),imageIcon.getIconHeight());
-//        // Get current screen size
-//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        // Get x coordinate on screen for make JWindow locate at center
-//        int x = (screenSize.width - getSize().width) / 2;
-//        // Get y coordinate on screen for make JWindow locate at center
-//        int y = (screenSize.height - getSize().height) / 2;
-//        // Set new location for JWindow
-//        setLocation(x,y);
-//        // Make JWindow visible
-//        setVisible(true);
-//    }
-//
-//    // Paint image onto JWindow
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        g.drawImage(splashScreen, 0, 0, this);
-//    }
-//
-//    public static void main(String[] args) {
-//        SplashScreen splash = new SplashScreen();
-//        try {
-//            // Make JWindow appear for 5 seconds before disappear
-//            Thread.sleep(5000);
-//            splash.dispose();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }

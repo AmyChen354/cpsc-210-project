@@ -1,6 +1,5 @@
 package ui;
 
-import misc.SplashDemo;
 import model.AccountBook;
 import model.Item;
 import model.ItemList;
@@ -14,11 +13,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-public class GUI {
+// Represents application's main window frame
+public class AccountBookUI {
     private static JFrame frame;
-    private JButton addButton;
-    private JButton showButton;
-    private JTextArea area;
     private ItemList list;
     private AccountBook book;
     private static final String JSON_STORE = "D:/AccountBook.json";
@@ -27,81 +24,29 @@ public class GUI {
 
     public static void main(String[] args) {
         frame = new JFrame();
-        new GUI();
+        new AccountBookUI();
         new SplashScreen(frame, "Welcome");
     }
 
-    public GUI() {
+    // EFFECTS: Constructor sets up the components of main window: frame, writer and reader, and menu
+    public AccountBookUI() {
         list = new ItemList();
         book = new AccountBook();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         frameComponents();
-//        labelComponents();
-//        buttonComponents();
-//        textFieldComponents();
-//        textAreaComponents();
         menu();
 //        showItems();
     }
 
+    // EFFECTS: Sets up frame with bounds and layout
     private void frameComponents() {
-//        frame = new JFrame();
         frame.setBounds(200, 100, 800, 700);
         frame.setLayout(null);
-//        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-//    private void labelComponents() {
-//        JLabel nameLabel = new JLabel("Item name: ");
-//        JLabel costLabel = new JLabel("Item cost($): ");
-//        JLabel expiryDateLabel = new JLabel("Item expiry date(yyyymmdd): ");
-//
-//        nameLabel.setBounds(20, 10, 100, 100);
-//        costLabel.setBounds(20, 70, 100, 100);
-//        expiryDateLabel.setBounds(20, 130, 200, 100);
-//
-//        frame.add(nameLabel);
-//        frame.add(costLabel);
-//        frame.add(expiryDateLabel);
-//    }
-//
-//    private void buttonComponents() {
-//        addButton = new JButton("Add item");
-//        showButton = new JButton("Show items");
-//
-//        addButton.setBounds(180, 230, 100, 50);
-//        addButton.setSize(100, 40);
-//        showButton.setBounds(180, 300, 100, 50);
-//        addButton.setSize(100, 40);
-//
-//        frame.add(addButton);
-//        frame.add(showButton);
-//    }
-//
-//    private void textFieldComponents() {
-//        JTextField nameField = new JTextField();
-//        JTextField costField = new JTextField();
-//        JTextField expiryDateField = new JTextField();
-//
-//        nameField.setBounds(100, 50, 100, 30);
-//        costField.setBounds(110, 110, 100, 30);
-//        expiryDateField.setBounds(200, 170, 100, 30);
-//
-//        frame.add(nameField);
-//        frame.add(costField);
-//        frame.add(expiryDateField);
-//    }
-//
-//    private void textAreaComponents() {
-//        area = new JTextArea();
-//
-//        area.setBounds(180, 400, 200, 200);
-//
-//        frame.add(area);
-//    }
-
+    // EFFECTS: Sets up menu bar with different menus as well as menu items
     private void menu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu newListMenu = new JMenu("New list");
@@ -124,11 +69,13 @@ public class GUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: Helper to add menu items with given handler to the given menu
     private void addMenuItem(JMenu menu, AbstractAction action) {
         JMenuItem menuItem = new JMenuItem(action);
         menu.add(menuItem);
     }
 
+    // EFFECTS: Represents action to be taken when user want to add a new list to the account book
     MouseListener addListAction = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent event) {
@@ -165,6 +112,7 @@ public class GUI {
         public void mouseExited(MouseEvent e) {}
     };
 
+
     private class SelectListAction extends AbstractAction {
 
         SelectListAction() {
@@ -180,17 +128,11 @@ public class GUI {
                      "Select a date: ", "Select the date of the list you would like to process",
                     JOptionPane.QUESTION_MESSAGE, null, lists, lists[0]);
 
-//            if (selectedDate != null) {
-//                int date = Integer.parseInt(selectedDate);
-//                return book.findList(date);
-//            }
-//            return null;
-
             System.out.println("Selected " + selectedDate);
         }
     }
 
-//    public ItemList selectListEvent() {
+//    public ItemList selectListEvent(ItemList selectedList) {
 //        ActionListener l = new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent event) {
@@ -201,12 +143,13 @@ public class GUI {
 //                        "Select a date: ", "Select the date of the list you would like to process",
 //                        JOptionPane.QUESTION_MESSAGE, null, lists, lists[0]);
 //                int date = Integer.parseInt(selectedDate);
-//                ItemList list = book.findList(date);
+//                selectedList = book.findList(date);
 //            }
 //        };
-//        return list;
+//        return l1;
 //    }
 
+    // EFFECTS: Represents action to be taken when user want to add a new item to a selected date
     private class AddItemAction extends AbstractAction {
 
         AddItemAction() {
@@ -246,6 +189,7 @@ public class GUI {
         }
     }
 
+    // EFFECTS: Represents action to be taken when user want to remove an item from a selected date
     private class RemoveItemAction extends AbstractAction {
 
         RemoveItemAction() {
@@ -275,6 +219,7 @@ public class GUI {
         }
     }
 
+    // EFFECTS: Represents action to be taken when user want to count the number of items on a selected date
     private class CountItemsAction extends AbstractAction {
 
         CountItemsAction() {
@@ -304,20 +249,21 @@ public class GUI {
         }
     }
 
-    private void showItems() {
-        ActionListener l = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    area.setText(list.showItems());
-                } catch (Exception e1) {
-                    System.out.println(e1);
-                }
-            }
-        };
-        showButton.addActionListener(l);
-    }
+//    private void showItems() {
+//        ActionListener l = new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    area.setText(list.showItems());
+//                } catch (Exception e1) {
+//                    System.out.println(e1);
+//                }
+//            }
+//        };
+//        showButton.addActionListener(l);
+//    }
 
+    // EFFECTS: Represents action to be taken when user want to save the account book to a directory
     MouseListener saveAction = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent event) {
@@ -345,6 +291,8 @@ public class GUI {
         public void mouseExited(MouseEvent e) {}
     };
 
+    // EFFECTS: Represents action to be taken when user want to load the account book from a directory where it was
+    //          saved
     MouseListener loadAction = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent event) {
