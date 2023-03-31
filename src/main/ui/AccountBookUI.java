@@ -37,10 +37,12 @@ public class AccountBookUI {
 
     // EFFECTS: Sets up frame with bounds and layout
     private void frameComponents() {
-        frame.setBounds(200, 100, 800, 700);
+        frame.setBounds(400, 100, 800, 700);
         frame.setLayout(null);
-        JLabel label = new JLabel("a");
-//        label.setText("<html><center><font size = '5'><color = blue></b>Welcome!</font>");
+        JLabel label = new JLabel();
+        label.setBounds(150, 250, 800, 100);
+        label.setText(
+                "<html><font size = '6'><color = black></b>Welcome to your personal account book!</font>");
         frame.add(label);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

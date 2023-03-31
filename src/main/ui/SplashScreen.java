@@ -42,6 +42,7 @@ public class SplashScreen extends JWindow {
         // Get y coordinate on screen for make JWindow locate at center
         int y = (screenSize.height - getSize().height) / 2;
         // Set new location for JWindow
+        setLocation(x, y);
 
         timer(frame);
     }
@@ -55,7 +56,7 @@ public class SplashScreen extends JWindow {
                 frame.setVisible(true);
                 dispose();
             }
-        }, 5000);
+        }, 3000);
     }
 
     // Paint the image onto the splashscreen
