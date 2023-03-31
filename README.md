@@ -51,5 +51,6 @@ software I designed also helps users keep track of the expiration dates of food 
 - You can remove an item from a date by pressing the "Existing list" menu on the top and then "Remove an item"
 - You can count the number of items on a date by pressing the "Existing list" menu on the top and then "Count the 
   number of items"
+- You can view the items on a date by pressing the "Existing list" menu on the top and then "View items in the list"
 - You can save the account book to local directory by pressing the "Save" menu on the top
 - You can load the account book from local directory by pressing the "Load" menu on the top
