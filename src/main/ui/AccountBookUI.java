@@ -1,15 +1,13 @@
 package ui;
 
-import model.AccountBook;
-import model.Item;
-import model.ItemList;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.awt.event.WindowAdapter;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 // Represents application's main window frame
@@ -24,6 +22,17 @@ public class AccountBookUI {
         frame = new JFrame();
         new AccountBookUI();
         new SplashScreen(frame, "Welcome");
+
+        // Prints all event logs to the console after closing the window
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                EventLog el = EventLog.getInstance();
+                for (Event next : el) {
+                    System.out.println(next + "\n");
+                }
+            }
+        });
     }
 
     // EFFECTS: Constructor sets up the components of main window: frame, writer and reader, and menu
@@ -58,6 +67,8 @@ public class AccountBookUI {
         menuBar.add(saveMenu);
         JMenu loadMenu = new JMenu("Load");
         menuBar.add(loadMenu);
+        JMenu logMenu = new JMenu("Log");
+        menuBar.add(logMenu);
 
         newListMenu.addMouseListener(addListAction);
         addMenuItem(existingListMenu, new AddItemAction());
@@ -66,6 +77,8 @@ public class AccountBookUI {
         addMenuItem(existingListMenu, new ShowItemsAction());
         saveMenu.addMouseListener(saveAction);
         loadMenu.addMouseListener(loadAction);
+        addMenuItem(logMenu, new PrintLogAction());
+        addMenuItem(logMenu, new ClearLogAction());
 
         frame.setJMenuBar(menuBar);
     }
@@ -100,16 +113,20 @@ public class AccountBookUI {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+        }
     };
 
     // EFFECTS: Represents action to be taken before user want to manage an existing list
@@ -244,16 +261,20 @@ public class AccountBookUI {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+        }
     };
 
     // EFFECTS: Represents action to be taken when user want to load the account book from a directory where it was
@@ -271,17 +292,46 @@ public class AccountBookUI {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+        }
     };
+
+    private class PrintLogAction extends AbstractAction {
+        PrintLogAction() {
+            super("Print log");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            LogPrinter lp = new ScreenPrinter(frame);
+            frame.add((ScreenPrinter) lp);
+            lp.printLog(EventLog.getInstance());
+        }
+    }
+
+    private class ClearLogAction extends AbstractAction {
+        ClearLogAction() {
+            super("Clear log");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            EventLog.getInstance().clear();
+        }
+    }
+
 
 
 }

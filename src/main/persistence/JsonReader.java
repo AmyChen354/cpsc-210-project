@@ -1,8 +1,6 @@
 package persistence;
 
-import model.AccountBook;
-import model.Item;
-import model.ItemList;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,6 +24,7 @@ public class JsonReader {
     public AccountBook read() throws IOException {
         String jsonData = readFile(source);
         JSONArray jsonArray = new JSONArray(jsonData);
+        EventLog.getInstance().logEvent(new Event("Read files"));
         return parseAccountBook(jsonArray);
     }
 

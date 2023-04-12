@@ -1,6 +1,8 @@
 package persistence;
 
 import model.AccountBook;
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,6 +32,7 @@ public class JsonWriter {
     public void write(AccountBook ab) {
         JSONArray json = ab.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("Wrote to file"));
     }
 
     // MODIFIES: this

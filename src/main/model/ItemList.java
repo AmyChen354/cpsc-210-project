@@ -21,6 +21,7 @@ public class ItemList implements Writable {
     // EFFECTS: Adds i to the list
     public void addItem(Item i) {
         itemList.add(i);
+        EventLog.getInstance().logEvent(new Event("Added " + i.getName()));
     }
 
     // REQUIRES: The list already contain an i with removeName
@@ -30,6 +31,7 @@ public class ItemList implements Writable {
         for (int i = 0; i < itemList.size(); i++) {
             if (removeName.equals(itemList.get(i).getName())) {
                 itemList.remove(i);
+                EventLog.getInstance().logEvent(new Event("Removed " + removeName));
             }
         }
     }
@@ -47,6 +49,7 @@ public class ItemList implements Writable {
                         + itemList.get(i).getCost() + " " + itemList.get(i).getExpiryDate();
                 allItems.add(itemInfo);
             }
+            EventLog.getInstance().logEvent(new Event("Showed all items"));
             return allItems.toString();
         } else {
             return null;
@@ -66,6 +69,7 @@ public class ItemList implements Writable {
 
     // EFFECTS: Returns the number of items in the list
     public int numOfItems() {
+        EventLog.getInstance().logEvent(new Event("Counted number of items"));
         return itemList.size();
     }
 

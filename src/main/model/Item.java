@@ -58,14 +58,4 @@ public class Item implements Writable {
         return json;
     }
 
-//    @Override
-//    public int compareTo(Item i) {
-//        if (cost == i.getCost()) {
-//            return 0;
-//        } else if (cost > i.getCost()) {
-//            return 1;
-//        } else {
-//            return -1;
-//        }
-//    }
 }

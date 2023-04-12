@@ -3,7 +3,6 @@ package model;
 import model.exceptions.InvalidDateException;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writable;
 
 import java.util.*;
 
@@ -47,6 +46,7 @@ public class AccountBook {
     //          otherwise returns null
     public ItemList findList(Integer date) {
         if (book.containsKey(date)) {
+            EventLog.getInstance().logEvent(new Event("Selected date: " + date));
             return book.get(date);
         } else {
             return null;
