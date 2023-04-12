@@ -54,3 +54,29 @@ software I designed also helps users keep track of the expiration dates of food 
 - You can view the items on a date by pressing the "Existing list" menu on the top and then "View items in the list"
 - You can save the account book to local directory by pressing the "Save" menu on the top
 - You can load the account book from local directory by pressing the "Load" menu on the top
+
+# Phase 4: Task 2
+
+Wed Apr 12 01:19:56 PDT 2023  
+Read account book
+
+Wed Apr 12 01:19:56 PDT 2023  
+Added apples
+
+Wed Apr 12 01:20:04 PDT 2023  
+Added date: 20230412
+
+Wed Apr 12 01:20:06 PDT 2023  
+Selected date: 20230412
+
+Wed Apr 12 01:20:10 PDT 2023  
+Added apples
+
+Wed Apr 12 01:20:14 PDT 2023  
+Selected date: 20230412
+
+Wed Apr 12 01:20:14 PDT 2023  
+Showed all items
+
+Wed Apr 12 01:20:15 PDT 2023  
+Saved account book

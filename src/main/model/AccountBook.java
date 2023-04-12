@@ -29,6 +29,7 @@ public class AccountBook {
             throw new InvalidDateException();
         }
         book.put(date, list);
+        EventLog.getInstance().logEvent(new Event("Added date: " + date));
     }
 
     // EFFECTS: Returns the number of item lists in book

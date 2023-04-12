@@ -32,7 +32,7 @@ public class JsonWriter {
     public void write(AccountBook ab) {
         JSONArray json = ab.toJson();
         saveToFile(json.toString(TAB));
-        EventLog.getInstance().logEvent(new Event("Wrote to file"));
+        EventLog.getInstance().logEvent(new Event("Saved account book"));
     }
 
     // MODIFIES: this

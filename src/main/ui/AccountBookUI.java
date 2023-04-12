@@ -89,7 +89,7 @@ public class AccountBookUI {
         menu.add(menuItem);
     }
 
-    // EFFECTS: Represents action to be taken when user want to add a new list to the account book
+    // EFFECTS: Represents action to be taken when user wants to add a new list to the account book
     MouseListener addListAction = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent event) {
@@ -129,7 +129,7 @@ public class AccountBookUI {
         }
     };
 
-    // EFFECTS: Represents action to be taken before user want to manage an existing list
+    // EFFECTS: Represents action to be taken before user wants to manage an existing list
     public ItemList selectListEvent() {
         String allDates = book.showDates().replace("[", "")
                 .replace("]", "").replace(" ", "");
@@ -141,7 +141,7 @@ public class AccountBookUI {
         return book.findList(date);
     }
 
-    // EFFECTS: Represents action to be taken when user want to add a new item to a selected date
+    // EFFECTS: Represents action to be taken when user wants to add a new item to a selected date
     private class AddItemAction extends AbstractAction {
 
         AddItemAction() {
@@ -176,7 +176,7 @@ public class AccountBookUI {
         }
     }
 
-    // EFFECTS: Represents action to be taken when user want to remove an item from a selected date
+    // EFFECTS: Represents action to be taken when user wants to remove an item from a selected date
     private class RemoveItemAction extends AbstractAction {
 
         RemoveItemAction() {
@@ -205,7 +205,7 @@ public class AccountBookUI {
         }
     }
 
-    // EFFECTS: Represents action to be taken when user want to count the number of items on a selected date
+    // EFFECTS: Represents action to be taken when user wants to count the number of items on a selected date
     private class CountItemsAction extends AbstractAction {
 
         CountItemsAction() {
@@ -221,7 +221,7 @@ public class AccountBookUI {
         }
     }
 
-    // EFFECTS: Represents action to be taken when user want to view all the items on a selected date
+    // EFFECTS: Represents action to be taken when user wants to view all the items on a selected date
     private class ShowItemsAction extends AbstractAction {
 
         ShowItemsAction() {
@@ -245,7 +245,7 @@ public class AccountBookUI {
         }
     }
 
-    // EFFECTS: Represents action to be taken when user want to save the account book to a directory
+    // EFFECTS: Represents action to be taken when user wants to save the account book to a directory
     MouseListener saveAction = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent event) {
@@ -277,7 +277,7 @@ public class AccountBookUI {
         }
     };
 
-    // EFFECTS: Represents action to be taken when user want to load the account book from a directory where it was
+    // EFFECTS: Represents action to be taken when user wants to load the account book from a directory where it was
     //          saved
     MouseListener loadAction = new MouseListener() {
         @Override
@@ -308,6 +308,7 @@ public class AccountBookUI {
         }
     };
 
+    // Represents action to be taken when user wants to print all the event logs
     private class PrintLogAction extends AbstractAction {
         PrintLogAction() {
             super("Print log");
@@ -321,6 +322,7 @@ public class AccountBookUI {
         }
     }
 
+    // Represents action to be taken when user wants to clear all the event logs
     private class ClearLogAction extends AbstractAction {
         ClearLogAction() {
             super("Clear log");

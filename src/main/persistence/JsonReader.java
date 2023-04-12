@@ -24,7 +24,7 @@ public class JsonReader {
     public AccountBook read() throws IOException {
         String jsonData = readFile(source);
         JSONArray jsonArray = new JSONArray(jsonData);
-        EventLog.getInstance().logEvent(new Event("Read files"));
+        EventLog.getInstance().logEvent(new Event("Read account book"));
         return parseAccountBook(jsonArray);
     }
 
