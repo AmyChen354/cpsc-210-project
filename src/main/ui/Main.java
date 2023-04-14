@@ -1,7 +1,5 @@
 package ui;
 
-import persistence.JsonWriter;
-
 import java.io.FileNotFoundException;
 
 public class Main {

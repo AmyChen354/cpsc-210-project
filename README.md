@@ -34,11 +34,8 @@ software I designed also helps users keep track of the expiration dates of food 
 - As a user, I want to be able to add a date to an account book, which contains a list of all dates
 - As a user, I want to be able to select a date and view the list of items on that selected date
 - As a user, I want to be able to see the number of items bought on a selected date
-- As a user, I want to be able to change the name/expiry date of an item  //TODO
 - As a user, I want to be able to remove an item bought from a selected date
 - As a user, I want to be able to compute the total costs on a selected date
-- As a user, I want to be able to find the date on which an item was bought  //TODO
-- As a user, I want to be able to rank the items on their costs/expiry dates  //TODO
 - As a user, when I select the quit option from the application menu, I want to be reminded to save the state of all 
   items and dates I have created so far to file and have the option to do so or not
 - As a user, when I start the application, I want to be given the option to load the account book and dates I have
@@ -80,3 +77,15 @@ Showed all items
 
 Wed Apr 12 01:20:15 PDT 2023  
 Saved account book
+
+# Phase 4: Task 3
+
+If I had more time to work on the project, I would go to the _menu()_ method in the **AccountBookUI** class, and extract
+the codes that add a new menu as well as its menu items as a new method to this class. By doing this, it makes the 
+overall structure of the _menu()_ method looks more organized, and thus makes it easier for me to debug the part in 
+which an error occurs.
+
+Furthermore, since all the mouse-clicking actions in the **AccountBookUI** class doesn't require all the methods except
+the mouseClicked method being overridden in the **MouseListener** interface, therefore I would like to design a method 
+that can only deal with the mouse-clicking action without implementing the **MouseListener** interface. By doing this, 
+all the other irrelevant methods can be removed in each mouse-clicking action and thus reduce code replication.

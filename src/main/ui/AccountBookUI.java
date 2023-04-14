@@ -14,7 +14,7 @@ import java.io.IOException;
 public class AccountBookUI {
     private static JFrame frame;
     private AccountBook book;
-    private static final String JSON_STORE = "D:/AccountBook.json";
+    private static final String JSON_STORE = "./data/AccountBookUI.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 

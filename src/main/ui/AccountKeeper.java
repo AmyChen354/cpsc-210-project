@@ -86,7 +86,6 @@ public class AccountKeeper {
     public void existingListMenu() {
         System.out.println("\t1 -> Record a spending");
         System.out.println("\t2 -> Manage your spending");
-//        System.out.println("\t3 -> Track the expiry dates");
     }
 
     // MODIFIES: this
@@ -99,8 +98,6 @@ public class AccountKeeper {
             existingListRecordSpending();
         } else if (command.equals("2")) {
             manageListCommand(command);
-//        } else if (command.equals("3")) {
-//        TODO
         } else {
             System.out.println("Selection not valid");
         }
@@ -182,10 +179,8 @@ public class AccountKeeper {
     // EFFECTS: Displays menu of managing a date to user
     private void manageListMenu() {
         System.out.println("\t1 -> Remove a spending from a list");
-//        System.out.println("\t2 -> Sort spending in ascending order");
-//        System.out.println("\t3 -> Sort spending in descending order");
-        System.out.println("\t4 -> Count the number of items bought");
-        System.out.println("\t5 -> Calculate the total cost");
+        System.out.println("\t2 -> Count the number of items bought");
+        System.out.println("\t3 -> Calculate the total cost");
     }
 
     // MODIFIES: this
@@ -196,13 +191,9 @@ public class AccountKeeper {
 
         if (command.equals("1")) {
             removeItem();
-//            } else if (command.equals("2")) {
-//                sortInAscending();
-//            } else if (command.equals("3")) {
-//                sortInDescending();
-        } else if (command.equals("4")) {
+        } else if (command.equals("2")) {
             countNum();
-        } else if (command.equals("5")) {
+        } else if (command.equals("3")) {
             calcTotalCost();
         } else {
             System.out.println("Selection not valid");
@@ -236,14 +227,6 @@ public class AccountKeeper {
             System.out.println("This list does not exist");
         }
     }
-
-//    private void sortInAscending() {
-//    TODO
-//    }
-
-//    private void sortInDescending() {
-//    TODO
-//    }
 
     // EFFECTS: Prints the number of items bought on a date the user selected
     private void countNum() {
